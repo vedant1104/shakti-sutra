@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+  <script type="text/javascript"  src="assets/lib/js/jquery-2.1.4.js"></script>
+  <style>
+  body {
+  font-family: Roboto;
+  background: -webkit-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); /* W3C */
+}
+
+ul {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+}
+
+
+h1 {
+  background: #2980b9; 
+  color: white;
+  margin: 0;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.fa-comments {
+  float: right;
+}
+
+
+
+
+li {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  color: #666;
+}
+
+li:nth-child(2n){
+  background: #f7f7f7;
+}
+
+span {
+  background: #e74c3c;
+  height: 40px;
+  margin-right: 20px;
+  text-align: center;
+  color: white;
+  width: 0;
+  display: inline-block;
+  transition: 0.2s linear;
+  opacity: 0;
+}
+
+li:hover span {
+  width: 40px;
+  opacity: 1.0;
+}
+
+input {
+  font-size: 18px;
+  color: #2980b9;
+  background-color: #f7f7f7;
+  width: 100%;
+  padding: 13px 13px 13px 20px;
+  box-sizing: border-box;
+  border: 3px solid rgba(0,0,0,0);
+}
+
+input:focus{
+  background: #fff;
+  border: 3px solid #2980b9;
+  outline: none;
+}
+
+#container {
+  width: 360px;
+  margin: 100px auto;
+  background: #f7f7f7;
+  box-shadow: 0 0 3px rgba(0,0,0, 0.1);
+}
+
+.completed {
+  color: gray;
+  text-decoration: line-through;
+}</style>
+</head>
+<body>
+<script>
+  // Check Off Specific Todos By Clicking
+$("ul").on("click", "li", function(){
+  $(this).toggleClass("completed");
+});
+
+//Click on X to delete Todo
+$("ul").on("click", "span", function(event){
+  $(this).parent().fadeOut(500,function(){
+    $(this).remove();
+  });
+  event.stopPropagation();
+});
+
+$("input[type='text']").keypress(function(event){
+  if(event.which === 13){
+    //grabbing new todo text from input
+    var todoText = $(this).val();
+    $(this).val("");
+    //create a new li and add to ul
+    $("ul").append("<li><span><i class='fa fa-trash'></i></span> " + todoText + "</li>")
+  }
+});
+
+$(".fa-plus").click(function(){
+  $("input[type='text']").fadeToggle();
+});
+</script>
+<div id="container">
+  <h1>CHAT WINDOW <i class="fa fa-comments"></i></h1>
+  <input type="text" placeholder="Start typing here...">
+
+  <ul>
+    <li><span><i class="fa fa-trash"></i></span> Go To Potions Class</li>
+    <li><span><i class="fa fa-trash"></i></span> Buy New Robes</li>
+    <li><span><i class="fa fa-trash"></i></span> Visit Hagrid</li>
+  </ul>
+</div>
+</body>
+</html>
